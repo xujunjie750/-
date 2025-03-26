@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>真实牛马时钟</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: #f0f0f0;
+        }
+        .clock-container {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+        }
+        .digital-clock {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #333;
+            margin: 20px 0;
+        }
+        .date-display {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        .weather-info {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin: 20px auto;
+            max-width: 300px;
+        }
+        .animal-container {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+        .animal-img {
+            width: 150px;
+            height: 150px;
+            object-fit: contain;
+            transition: opacity 0.1s;
+        }
+    </style>
+</head>
+<body>
+    <div class="clock-container">
+        <h1>牛马时钟</h1>
+        
+        <div class="digital-clock" id="time">00:00:00</div>
+        <div class="date-display" id="date">2025年3月26日 星期三</div>
+        
+        <div class="animal-container">
+            <img id="cow" class="animal-img" src="https://img.icons8.com/plasticine/200/cow.png" alt="牛头">
+            <img id="horse" class="animal-img" src="https://img.icons8.com/plasticine/200/horse.png" alt="马头" style="opacity:0;">
+        </div>
+        
+        <div class="weather-info">
+            <h3>北京天气</h3>
+            <p>☀️ 晴天 22°C/10°C</p>
+            <p>👕 穿衣建议: 轻便外套+长袖</p>
+        </div>
+    </div>
+
+    <script>
+        // 更新时间
+        function updateTime() {
+            const now = new Date();
+            const weekdays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+            
+            document.getElementById('date').textContent = 
+                `${now.getFullYear()}年${(now.getMonth()+1).toString().padStart(2, '0')}月${now.getDate().toString().padStart(2, '0')}日 ${weekdays[now.getDay()]}`;
+            
+            document.getElementById('time').textContent = 
+                `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`;
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+        
+        // 牛马动画
+        const cow = document.getElementById('cow');
+        const horse = document.getElementById('horse');
+        let showCow = true;
+        
+        setInterval(() => {
+            if(showCow) {
+                cow.style.opacity = '1';
+                horse.style.opacity = '0';
+            } else {
+                cow.style.opacity = '0';
+                horse.style.opacity = '1';
+            }
+            showCow = !showCow;
+        }, 2000);
+    </script>
+</body>
+</html>
